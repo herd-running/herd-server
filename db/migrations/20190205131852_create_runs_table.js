@@ -10,6 +10,7 @@ exports.up = function(knex, Promise) {
     table.string('pace');
     table.string('distance')
     table.string('description');
+    table.timestamps(true, true)
   })
 };
 

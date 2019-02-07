@@ -5,6 +5,7 @@ exports.up = function(knex, Promise) {
     table.integer('group_id').references('groups.id').notNullable();
     table.string('title').notNullable();
     table.text('comment').notNullable();
+    table.timestamps(true, true)
   })
 };
 

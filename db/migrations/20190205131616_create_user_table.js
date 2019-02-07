@@ -7,6 +7,7 @@ exports.up = function(knex, Promise) {
     table.string('username').notNullable().unique();
     table.text('hashed_password').notNullable();
     table.text('picture_url');
+    table.timestamps(true, true)
   })
 };
 

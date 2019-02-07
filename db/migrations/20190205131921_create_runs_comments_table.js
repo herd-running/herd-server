@@ -6,6 +6,7 @@ exports.up = function(knex, Promise) {
     table.string('title').notNullable();
     table.integer('rating').notNullable();
     table.text('comment').notNullable();
+    table.timestamps(true, true)
   })
 };
 

@@ -3,6 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.integer('user_id').references('user.id').notNullable();
     table.integer('run_id').references('runs.id').notNullable();
+    table.timestamps(true, true)
   })
 };
 

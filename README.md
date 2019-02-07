@@ -34,6 +34,8 @@ npm run dev
 ```
 npm start
 ```
+## Data Structure
+![Data structure](/Database.png)
 
 ## Routes
 
@@ -105,6 +107,3 @@ npm start
 * PUT
   * `groups/:groupId/runs/:runId/comments/:commentId`
 
-
-## Data Structure
-![Data structure](/Database.png)

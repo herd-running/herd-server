@@ -4,6 +4,7 @@ exports.up = function(knex, Promise) {
     table.integer('user_id').references('user.id').notNullable();
     table.integer('group_id').references('groups.id').notNullable();
     table.boolean('is_leader').notNullable();
+    table.timestamps(true, true)
   })
 };
 
