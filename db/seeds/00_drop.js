@@ -7,5 +7,5 @@ exports.seed = function(knex, Promise) {
     .then(() => knex('groups_comments').del())
     .then(() => knex('users_groups').del())
     .then(() => knex('groups').del())
-    .then(() => knex('user').del())
+    .then(() => knex('users').del())
 }

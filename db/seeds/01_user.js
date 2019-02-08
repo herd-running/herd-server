@@ -1,10 +1,10 @@
 
 exports.seed = function(knex, Promise) {
   // Deletes ALL existing entries
-  return knex('user').del()
+  return knex('users').del()
     .then(function () {
       // Inserts seed entries
-      return knex('user').insert([
+      return knex('users').insert([
         {id: 1, first_name: 'Jake', last_name: 'Hommer', username: 'jhommer', email: 'test@jake.com', hashed_password: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US', picture_url: 'https://pbs.twimg.com/profile_images/1034666205389320192/vyXJP-71_400x400.jpg'},
         {id: 2, first_name: 'Celia', last_name: 'Marshall', username: 'cmarshall', email: 'test@celia.com', hashed_password: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US', picture_url: 'https://avatars3.githubusercontent.com/u/39441243?s=460&v=4' },
         {id: 3, first_name: 'Sam', last_name: 'Violette', username: 'sviolette', email: 'test@sam.com', hashed_password: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US', picture_url: 'https://pbs.twimg.com/profile_images/959545624084480000/3Y-QocO9.jpg'},
@@ -17,7 +17,7 @@ exports.seed = function(knex, Promise) {
     .then(() => {
       // reset sequence
       return knex.raw(
-        `SELECT setval('user_id_seq', (SELECT MAX(id) FROM user));`
+        `SELECT setval('users_id_seq', (SELECT MAX(id) FROM users));`
         )
     })
 }

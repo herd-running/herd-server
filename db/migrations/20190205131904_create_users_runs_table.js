@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('users_runs', (table) => {
     table.increments();
-    table.integer('user_id').references('user.id').notNullable();
+    table.integer('user_id').references('users.id').notNullable();
     table.integer('run_id').references('runs.id').notNullable();
     table.timestamps(true, true)
   })
