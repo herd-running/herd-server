@@ -7,7 +7,9 @@ router.get('/', groupController.getAll)
 
 router.get('/:groupId', groupController.getOne)
 
-// router.post('/', groupController.create)
+router.post('/', groupController.create)
+
+router.delete('/:groupId', groupController.remove)
 
 
 

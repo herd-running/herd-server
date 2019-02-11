@@ -3,7 +3,7 @@ exports.up = function(knex, Promise) {
     table.increments();
     table.string('name').notNullable();
     table.text('description').notNullable();
-    // table.integer('zipcode')
+    table.integer('zip_code')
     table.timestamps(true, true);
   })
 };
