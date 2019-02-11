@@ -89,21 +89,21 @@ npm start
 * GET ALL OF A GROUP'S RUNS
   * `/groups/:groupId/runs`
 * GET ONE
-  * `groups/:groupId/runs/:runId`
+  * `runs/:runId`
 * POST
-  * `/groups/:groupId/runs`
+  * `/runs`
 * DELETE
-  * `groups/:groupId/runs/:runId`
+  * `/runs/:runId`
 * PUT
-  * `groups/:groupId/runs/:runId`
+  * `/runs/:runId`
 
 ### Run Comments
 * GET ALL COMMENTS FOR A RUN
-  * `groups/:groupId/runs/:runId/comments`
+  * `/runs/:runId/comments`
 * POST
-  * `groups/:groupId/runs/:runId/comments`
+  * `/runs/:runId/comments`
 * DELETE
-  * `groups/:groupId/runs/:runId/comments/:commentId`
+  * `/runs/:runId/comments/:commentId`
 * PUT
-  * `groups/:groupId/runs/:runId/comments/:commentId`
+  * `/runs/:runId/comments/:commentId`
 

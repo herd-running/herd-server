@@ -1,17 +1,17 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const morgan = require('morgan')
-const cors = require('cors')
 const app = express()
 
-app.use(cors())
 app.use(bodyParser.json())
 app.use(morgan('dev'))
 if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 
 //Routes
-app.use('/login', require('./routes/auth'))
-app.use('/', require('./routes/'))
+// app.use('/login', require('./routes/auth'))
+// app.use('/users', require('./routes/users'))
+app.use('/groups', require('./routes/groups'))
+// app.use('/runs', require('./routes/runs'))
 
 //Default Route
 app.use(function(req, res, next){
