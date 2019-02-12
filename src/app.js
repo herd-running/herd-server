@@ -9,7 +9,7 @@ if(process.env.NODE_ENV !== 'production'){ require('dotenv').load() }
 
 //Routes
 // app.use('/login', require('./routes/auth'))
-// app.use('/users', require('./routes/users'))
+app.use('/users', require('./routes/users'))
 app.use('/groups', require('./routes/groups'))
 // app.use('/runs', require('./routes/runs'))
 

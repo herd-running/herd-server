@@ -47,27 +47,27 @@ npm start
 
 ### Users
 * GET ONE
-  * `/users/:userId`
+  <!-- * `/users/:userId`  -->
 * POST
-  * `/users`
+  <!-- * `/users` -->
 * GET ALL USERS ON A RUN
   * `/runs/:runId/users`
 * GET ALL USERS IN A GROUP
-  * `/groups/:groupId/users`
-* GET ALL LEADERS OF A GROUP
-  * `/groups/:groupId/users?leader=true`
+  <!-- * `/groups/:groupId/users` -->
+* GET LEADER OF A GROUP
+  <!-- * `/groups/:groupId/users?leader=true` -->
 
 ### Groups
 * GET ALL 
-  * `/groups`
+  <!-- * `/groups` -->
 * GET ALL OF A USER'S GROUPS
-  * `/users/:userId/groups`
+  <!-- * `/users/:userId/groups` -->
 * GET ONE
-  * `/groups/:groupId`
+  <!-- * `/groups/:groupId` -->
 * POST
-  * `/groups`
+  <!-- * `/groups` -->
 * DELETE
-  * `/groups/:groupId`
+  <!-- * `/groups/:groupId` -->
 * PUT
   * `/groups/:groupId`
 
