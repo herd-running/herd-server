@@ -3,11 +3,11 @@ exports.up = function(knex, Promise) {
   return knex.schema.createTable('runs', (table) => {
     table.increments();
     table.integer('group_id').references('groups.id');
-    table.integer('creator_id').references('users.id')
+    table.integer('creator_id').references('users.id').notNullable();
     table.string('day');
     table.date('date');
     table.time('time').notNullable();
-    table.text('location')
+    table.text('location');
     table.float('latitude').notNullable();
     table.float('longitude').notNullable();
     table.string('run_type').notNullable();
@@ -15,7 +15,7 @@ exports.up = function(knex, Promise) {
     table.string('pace');
     table.string('distance')
     table.text('description');
-    table.timestamps(true, true)
+    table.timestamps(true, true);
   })
 };
 

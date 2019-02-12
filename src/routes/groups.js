@@ -23,7 +23,4 @@ router.post('/:groupId/comments', groupController.postComment)
 router.delete('/:groupId/comments/:commentId', groupController.removeComment)
 
 
-
-// router.use('/:groupId/users', require('../routes/users'))
-
 module.exports = router
