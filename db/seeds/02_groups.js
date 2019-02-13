@@ -13,7 +13,7 @@ exports.seed = function(knex, Promise) {
         },
         {
           id: 2,
-          name: 'Green Lake Running Groups',
+          name: 'Green Lake Running Group',
           description: 'Green Lake is one of the most popular destinations for urban runnings in the Seattle area. The Seattle Green Lake Running Group was created with the intent of creating a running community that supports and encourages a healthy and active lifestyle through group events and participation. Our goal is to try and have something for everyone and the more runners that attend events the better chance that there will be running buddies for all. Whether you\'re looking to increase your cardiovascular endurance, meet some new exercise buddies or have training partners for your next race you\'ve come to the right place.',
           zip_code: 98116
         },

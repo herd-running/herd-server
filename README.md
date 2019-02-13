@@ -51,17 +51,17 @@ npm start
 * POST
   <!-- * `/users` -->
 * GET ALL USERS ON A RUN
-  * `/runs/:runId/users`
+  <!-- * `/runs/:runId/users` -->
 * GET ALL USERS IN A GROUP
   <!-- * `/groups/:groupId/users` -->
 * GET LEADER OF A GROUP
   <!-- * `/groups/:groupId/users?leader=true` -->
 
 ### Groups
-* GET ALL 
-  <!-- * `/groups` -->
+GET ALL GROUPSS A USER DOESNT HAVE
+  <!-- * `users/:userId/runs?running=false?member=false` -->
 * GET ALL OF A USER'S GROUPS
-  <!-- * `/users/:userId/groups` -->
+  <!-- * `/users/:userId/groups?member=true` -->
 * GET ONE
   <!-- * `/groups/:groupId` -->
 * POST
@@ -82,18 +82,18 @@ npm start
   * `/groups/:groupId/comments/:commentId`
 
 ### Runs
-* GET ALL 
-  * `/runs`
+* GET ALL RUNS A USER DOESNT HAVE
+  <!-- * `users/:userId/runs?running=false` -->
 * GET ALL OF A USER'S RUNS
-  * `/users/:userId/runs`
-* GET ALL OF A GROUP'S RUNS
-  * `/groups/:groupId/runs`
-* GET ONE
-  * `runs/:runId`
+  <!-- * `/users/:userId/runs?running=true` --> -->
+ * GET ALL OF A GROUP'S RUNS
+  <!-- * `/groups/:groupId/runs` --> -->
+ * GET ONE
+  <!-- * `runs/:runId` -->
 * POST
-  * `/runs`
+  <!-- * `/runs` -->
 * DELETE
-  * `/runs/:runId`
+  <!-- * `/runs/:runId` -->
 * PUT
   * `/runs/:runId`
 

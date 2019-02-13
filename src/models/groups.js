@@ -1,7 +1,20 @@
 const knex = require('../../db/index')
 
-function getAll() {
+function getUsersGroups(userId) {
   return knex('groups')
+  .join('users_groups', 'groups.id', 'users_groups.group_id')
+  .where({'user_id': userId})
+}
+
+function getNewGroups(userId) {
+  return getUsersGroups(userId)
+    .then(myGroups => {
+      return knex('groups')
+        .select('groups.*')
+        .join('users_groups', 'groups.id', 'users_groups.group_id')
+        .whereNotIn('groups.id', myGroups.map(group => group.group_id))
+        .distinct('groups.id')
+    })
 }
 
 function getOne(groupId) {
@@ -18,14 +31,8 @@ function create(name, description) {
 function remove(groupId) {
   return knex('groups')
     .del()
-    .where({ 'groups.id': groupId })
+    .where({ 'id': groupId })
     .returning('*')
-}
-
-function getUsersGroups(userId) {
-  return knex('groups')
-  .join('users_groups', 'groups.id', 'users_groups.group_id')
-  .where({'user_id': userId})
 }
 
 function getAllComments(req, res, next) {
@@ -42,11 +49,11 @@ function removeComment(req, res, next) {
 
 
 module.exports = {
-  getAll,
+  getUsersGroups,
+  getNewGroups,
   getOne,
   create,
   remove,
-  getUsersGroups,
   getAllComments,
   postComment,
   removeComment

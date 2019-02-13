@@ -1,25 +1,24 @@
 const express = require('express')
 const router = express.Router({mergeParams: true})
-const groupController = require('../controllers/groups')
 const userController = require('../controllers/users')
 const runController = require('../controllers/runs')
 // const authController = require('../controllers/auth')
 
-router.get('/', groupController.getAll)
+router.get('/:runId', runController.getOne)
 
-router.get('/:runId', groupController.getOne)
+router.post('/', runController.create)
 
-router.post('/', groupController.create)
-
-router.delete('/:runId', groupController.remove)
+router.delete('/:runId', runController.remove)
 
 
+router.get('/:runId/users', userController.getRunUsers)
 
-router.get('/:runId/comments', groupController.getAllComments)
 
-router.post('/:runId/comments', groupController.postComment)
+router.get('/:runId/comments', runController.getAllComments)
 
-router.delete('/:runId/comments/:commentId', groupController.removeComment)
+router.post('/:runId/comments', runController.postComment)
+
+router.delete('/:runId/comments/:commentId', runController.removeComment)
 
 
 module.exports = router

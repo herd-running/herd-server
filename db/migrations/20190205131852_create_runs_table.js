@@ -6,7 +6,7 @@ exports.up = function(knex, Promise) {
     table.integer('creator_id').references('users.id').notNullable();
     table.string('day');
     table.date('date');
-    table.time('time').notNullable();
+    table.string('time').notNullable();
     table.text('location');
     table.float('latitude').notNullable();
     table.float('longitude').notNullable();
