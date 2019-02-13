@@ -10,16 +10,21 @@ function create(req, res, next){
   if(!req.body.first_name || !req.body.last_name || !req.body.email || !req.body.username || !req.body.password) {
     return next({ status: 400, message: 'Could not create account'})
   }
-  userModel.create(req.body.first_name, req.body.last_name, req.body.email, req.body.username, req.body.password, req.body.picture_url  )
+  userModel.create(req.body.first_name, req.body.last_name, req.body.email, req.body.username, req.body.password, req.body.picture_url )
   .then(function(data){
     return res.status(201).send(data)
   })
   .catch(next)
 }
 
-function getGroupsUsers(req, res, next) {
-  console.log('controller')
-  userModel.getGroupsUsers(req.params.groupId)
+function getGroupUsers(req, res, next) {
+  userModel.getGroupUsers(req.params.groupId, req.query.leader)
+  .then(data => res.send(data))
+  .catch(next)
+}
+
+function getRunUsers(req, res, next) {
+  userModel.getRunUsers(req.params.runId)
   .then(data => res.send(data))
   .catch(next)
 }
@@ -28,5 +33,6 @@ function getGroupsUsers(req, res, next) {
 module.exports = {
   getOne,
   create,
-  getGroupsUsers
+  getGroupUsers,
+  getRunUsers
 }
