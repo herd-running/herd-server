@@ -36,40 +36,43 @@ function create(first_name, last_name, email, username, password, picture_url) {
     })
 }
 
-const groupsUsersJoin = (groupId) => knex('users')
-  .join('users_groups', 'users.id', 'users_groups.user_id')
-  .where({ 'group_id': groupId })
-
-function getGroupUsers(groupId, leader) {
-  if (leader) {
-    return groupsUsersJoin(groupId).where({ 'users_groups.is_leader': true })
-      .then(data => {
-        for (user of data) {
-          delete user.hashed_password
-        }
-        return data[0]
-      })
-  }
-  else {
-    return groupsUsersJoin(groupId)
-      .then(data => {
-        for (user of data) {
-          delete user.hashed_password
-        }
-        return data
-      })
-  }
+function getUsersGroups(userId) {
+  return knex('groups')
+  .join('users_groups', 'groups.id', 'users_groups.group_id')
+  .where({'user_id': userId})
 }
 
-function getRunUsers(runId) {
-  return knex('users')
-    .join('users_runs', 'users.id', 'users_runs.user_id')
-    .where({'run_id': runId})
-    .then(data => {
-      for (user of data) {
-        delete user.hashed_password
-      }
-      return data
+//the gruops the user is not a member of yet (for discovery)
+function getNewGroups(userId) {
+  return getUsersGroups(userId)
+    .then(myGroups => {
+      return knex('groups')
+        .select('groups.*')
+        .join('users_groups', 'groups.id', 'users_groups.group_id')
+        .whereNotIn('groups.id', myGroups.map(group => group.group_id))
+        .distinct('groups.id')
+    })
+}
+
+function getUserRuns(userId) {
+  return knex('runs')
+    .join('users_runs', 'runs.id', 'users_runs.run_id')
+    .join('users', 'users.id', 'users_runs.user_id')
+    .join('groups', 'groups.id', 'runs.group_id')
+    .where({ 'users.id': userId })
+}
+
+//the runs the user is not participating in yet (for discovery)
+function getNewRuns(userId) {
+  return getUserRuns(userId)
+    .then(myRuns => {
+      return knex('runs')
+        .select('runs.*','groups.name')
+        .join('users_runs', 'runs.id', 'users_runs.run_id')
+        .join('users', 'users.id', 'users_runs.user_id')
+        .join('groups', 'groups.id', 'runs.group_id')
+        .whereNotIn('runs.id', myRuns.map(e => e.run_id))
+        .distinct('runs.id')
     })
 }
 
@@ -78,6 +81,8 @@ module.exports = {
   getOne,
   getUserByUsername,
   create,
-  getGroupUsers,
-  getRunUsers
+  getUsersGroups,
+  getNewGroups,
+  getUserRuns,
+  getNewRuns
 }

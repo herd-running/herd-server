@@ -1,8 +1,7 @@
 const express = require('express')
 const router = express.Router({mergeParams: true})
 const groupController = require('../controllers/groups')
-const userController = require('../controllers/users')
-const runController = require('../controllers/runs')
+
 // const authController = require('../controllers/auth')
 
 router.get('/:groupId', groupController.getOne)
@@ -12,9 +11,14 @@ router.post('/', groupController.create)
 router.delete('/:groupId', groupController.remove)
 
 
-router.get('/:groupId/users', userController.getGroupUsers)
+router.get('/:groupId/users', groupController.getGroupUsers)
 
-router.get('/:groupId/runs', runController.getGroupRuns)
+router.post('/:groupId/users/:userId', groupController.addUserToGroup)
+
+router.delete('/:groupId/users/:userId', groupController.removeUserFromGroup)
+
+
+router.get('/:groupId/runs', groupController.getGroupRuns)
 
 
 router.get('/:groupId/comments', groupController.getAllComments)
