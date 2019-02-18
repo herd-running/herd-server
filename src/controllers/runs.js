@@ -1,24 +1,8 @@
 const runModel = require('../models/runs')
 
-function getRuns(req, res, next) {
-  const bool = JSON.parse(req.query.running)
-
-  if (bool) {
-    runModel.getUserRuns(req.params.userId)
-      .then(data => res.send(data))
-      .catch(next)
-  }
-
-  else {
-    runModel.getNewRuns(req.params.userId)
-    .then(data => res.send(data))
-    .catch(next)
-  }
-}
-
 function getOne(req, res, next) {
   runModel.getOne(req.params.runId)
-    .then(([data]) => res.send(data))
+    .then((data) => res.send(data))
     .catch(next)
 }
 
@@ -50,6 +34,24 @@ function remove(req, res, next) {
     .catch(next)
 }
 
+function getRunUsers(req, res, next) {
+  runModel.getRunUsers(req.params.runId)
+    .then(data => res.send(data))
+    .catch(next)
+}
+
+function addUserToRun(req, res, next) {
+  runModel.addUserToRun(req.params.runId, req.params.userId)
+    .then(data => res.send(data))
+    .catch(next)
+}
+
+function removeUserFromRun(req, res, next) {
+  runModel.removeUserFromRun(req.params.runId, req.params.userId)
+    .then(data => res.send(data))
+    .catch(next)
+}
+
 function getAllComments(req, res, next) {
 
 }
@@ -62,20 +64,17 @@ function removeComment(req, res, next) {
 
 }
 
-function getGroupRuns(req, res, next) {
-  runModel.getGroupRuns(req.params.groupId)
-    .then(data => res.send(data))
-    .catch(next)
-}
+
 
 
 module.exports = {
-  getRuns,
   getOne,
   create,
   remove,
+  getRunUsers,
+  addUserToRun,
+  removeUserFromRun,
   getAllComments,
   postComment,
-  removeComment,
-  getGroupRuns
+  removeComment
 }

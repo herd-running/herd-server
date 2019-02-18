@@ -1,6 +1,5 @@
 const express = require('express')
 const router = express.Router({mergeParams: true})
-const userController = require('../controllers/users')
 const runController = require('../controllers/runs')
 // const authController = require('../controllers/auth')
 
@@ -11,7 +10,11 @@ router.post('/', runController.create)
 router.delete('/:runId', runController.remove)
 
 
-router.get('/:runId/users', userController.getRunUsers)
+router.get('/:runId/users', runController.getRunUsers)
+
+router.post('/:runId/users/:userId', runController.addUserToRun)
+
+router.delete('/:runId/users/:userId', runController.removeUserFromRun)
 
 
 router.get('/:runId/comments', runController.getAllComments)

@@ -1,40 +1,18 @@
 const knex = require('../../db/index')
 
-function getUserRuns(userId) {
-  return knex('runs')
-    .join('users_runs', 'runs.id', 'users_runs.run_id')
-    .join('users', 'users.id', 'users_runs.user_id')
-    .join('groups', 'groups.id', 'runs.group_id')
-    .where({ 'users.id': userId })
-}
-
-//the runs the user is not participating in yet (for discovery)
-function getNewRuns(userId) {
-  return getUserRuns(userId)
-    .then(myRuns => {
-      return knex('runs')
-        .select('runs.*','groups.name')
-        .join('users_runs', 'runs.id', 'users_runs.run_id')
-        .join('users', 'users.id', 'users_runs.user_id')
-        .join('groups', 'groups.id', 'runs.group_id')
-        .whereNotIn('runs.id', myRuns.map(e => e.run_id))
-        .distinct('runs.id')
-
-    })
-}
-
 function getOne(runId) {
   return knex('runs')
-    .select('groups.*', 'runs.id as id', 'day', 'date', 'time', 'location', 'run_type', 'terrain', 'pace', 'distance', 'runs.description')
-    .join('groups', 'groups.id', 'runs.group_id')
-    .where({ 'runs.id': runId })
-}
-
-function getGroupRuns(groupId) {
-  return knex('runs')
-    .select('groups.*', 'runs.id as id', 'day', 'date', 'time', 'location', 'run_type')
-    .join('groups', 'groups.id', 'runs.group_id')
-    .where({ 'group_id': groupId })
+  .where({ 'runs.id': runId })
+  .then(([data]) => {
+    if (!data['group_id']) return data
+    else {
+      return knex('runs')
+      .select('groups.name', 'runs.id as id', 'creator_id', 'day', 'date', 'time', 'location', 'run_type', 'terrain', 'pace', 'distance', 'runs.description')
+      .join('groups', 'groups.id', 'runs.group_id')
+      .where({ 'runs.id': runId })
+      .then(([data]) => data)
+    }
+  })
 }
 
 function create(
@@ -77,12 +55,36 @@ function remove(runId) {
     .returning('*')
 }
 
+function getRunUsers(runId) {
+  return knex('users')
+    .join('users_runs', 'users.id', 'users_runs.user_id')
+    .where({'run_id': runId})
+    .then(data => {
+      for (user of data) {
+        delete user.hashed_password
+      }
+      return data
+    })
+}
+
+function addUserToRun (run_id, user_id) {
+  return knex('users_runs')
+    .insert({ run_id, user_id })
+    .returning('*')
+}
+
+function removeUserFromRun (run_id, user_id) {
+  return knex('users_runs')
+    .del()
+    .where({run_id, user_id})
+    .returning('*')
+}
 
 module.exports = {
-  getUserRuns,
-  getNewRuns,
-  getGroupRuns,
   getOne,
   create,
-  remove
+  remove,
+  getRunUsers,
+  addUserToRun,
+  removeUserFromRun
 }
