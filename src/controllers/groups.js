@@ -6,15 +6,6 @@ function getOne(req, res, next) {
     .catch(next)
 }
 
-function create(req, res, next) {
-  if (!req.body.name || !req.body.description) {
-    return next({ status: 400, message: 'Could not create group' })
-  }
-  groupModel.create(req.body.name, req.body.description)
-    .then(data => res.status(201).send(data))
-    .catch(next)
-}
-
 function remove(req, res, next) {
   groupModel.remove(req.params.groupId)
     .then(data => res.send(data))
@@ -58,7 +49,6 @@ function removeComment(req, res, next) {
 
 module.exports = {
   getOne,
-  create,
   remove,
   getGroupUsers,
   addUserToGroup,

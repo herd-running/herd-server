@@ -32,6 +32,15 @@ function getGroups(req, res, next) {
   }
 }
 
+function createGroup(req, res, next) {
+  if (!req.body.name || !req.body.description) {
+    return next({ status: 400, message: 'Could not create group' })
+  }
+  userModel.createGroup(req.params.userId, req.body.name, req.body.description)
+    .then(data => res.status(201).send(data))
+    .catch(next)
+}
+
 function getRuns(req, res, next) {
   const bool = JSON.parse(req.query.running)
 
@@ -52,5 +61,6 @@ module.exports = {
   getOne,
   create,
   getGroups,
+  createGroup,
   getRuns
 }

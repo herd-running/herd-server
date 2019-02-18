@@ -42,7 +42,8 @@ exports.seed = function(knex, Promise) {
         {id: 35, user_id: 7, run_id: 6 },
         {id: 36, user_id: 1, run_id: 13},
         {id: 37, user_id: 2, run_id: 13},
-        {id: 38, user_id: 3, run_id: 13}
+        {id: 38, user_id: 3, run_id: 13},
+        {id: 39, user_id: 6, run_id: 13 },
       ])
     })
     .then(() => {

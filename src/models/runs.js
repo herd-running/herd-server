@@ -2,9 +2,17 @@ const knex = require('../../db/index')
 
 function getOne(runId) {
   return knex('runs')
-    .select('groups.*', 'runs.id as id', 'day', 'date', 'time', 'location', 'run_type', 'terrain', 'pace', 'distance', 'runs.description')
-    .join('groups', 'groups.id', 'runs.group_id')
-    .where({ 'runs.id': runId })
+  .where({ 'runs.id': runId })
+  .then(([data]) => {
+    if (!data['group_id']) return data
+    else {
+      return knex('runs')
+      .select('groups.name', 'runs.id as id', 'creator_id', 'day', 'date', 'time', 'location', 'run_type', 'terrain', 'pace', 'distance', 'runs.description')
+      .join('groups', 'groups.id', 'runs.group_id')
+      .where({ 'runs.id': runId })
+      .then(([data]) => data)
+    }
+  })
 }
 
 function create(
@@ -59,10 +67,24 @@ function getRunUsers(runId) {
     })
 }
 
+function addUserToRun (run_id, user_id) {
+  return knex('users_runs')
+    .insert({ run_id, user_id })
+    .returning('*')
+}
+
+function removeUserFromRun (run_id, user_id) {
+  return knex('users_runs')
+    .del()
+    .where({run_id, user_id})
+    .returning('*')
+}
 
 module.exports = {
   getOne,
   create,
   remove,
-  getRunUsers
+  getRunUsers,
+  addUserToRun,
+  removeUserFromRun
 }

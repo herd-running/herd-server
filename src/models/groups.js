@@ -5,12 +5,6 @@ function getOne(groupId) {
     .where({ 'id': groupId })
 }
 
-function create(name, description) {
-  return knex('groups')
-    .insert({ name, description })
-    .returning('*')
-}
-
 function remove(groupId) {
   return knex('groups')
     .del()
@@ -78,7 +72,6 @@ function removeComment(req, res, next) {
 
 module.exports = {
   getOne,
-  create,
   remove,
   getGroupUsers,
   addUserToGroup,

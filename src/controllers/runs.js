@@ -2,7 +2,7 @@ const runModel = require('../models/runs')
 
 function getOne(req, res, next) {
   runModel.getOne(req.params.runId)
-    .then(([data]) => res.send(data))
+    .then((data) => res.send(data))
     .catch(next)
 }
 
@@ -46,6 +46,12 @@ function addUserToRun(req, res, next) {
     .catch(next)
 }
 
+function removeUserFromRun(req, res, next) {
+  runModel.removeUserFromRun(req.params.runId, req.params.userId)
+    .then(data => res.send(data))
+    .catch(next)
+}
+
 function getAllComments(req, res, next) {
 
 }
@@ -67,6 +73,7 @@ module.exports = {
   remove,
   getRunUsers,
   addUserToRun,
+  removeUserFromRun,
   getAllComments,
   postComment,
   removeComment

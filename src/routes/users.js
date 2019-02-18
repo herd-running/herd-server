@@ -10,6 +10,8 @@ router.post('/', userController.create)
 
 router.get('/:userId/groups', userController.getGroups)
 
+router.post('/:userId/groups', userController.createGroup)
+
 
 router.get('/:userId/runs', userController.getRuns)
 

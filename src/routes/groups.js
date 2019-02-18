@@ -6,8 +6,6 @@ const groupController = require('../controllers/groups')
 
 router.get('/:groupId', groupController.getOne)
 
-router.post('/', groupController.create)
-
 router.delete('/:groupId', groupController.remove)
 
 

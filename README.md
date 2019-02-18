@@ -53,9 +53,9 @@ npm start
 * GET ALL USERS ON A RUN
   <!-- * `/runs/:runId/users` -->
 * POST USER TO A RUN
-  * `/runs/:runId/users/:userId`
+  <!-- * `/runs/:runId/users/:userId` -->
 * DELETE USER FROM A RUN
-  * `/runs/:runId/users/:userId`
+  <!-- * `/runs/:runId/users/:userId` -->
 * GET ALL USERS IN A GROUP
   <!-- * `/groups/:groupId/users` -->
 * GET LEADER OF A GROUP
@@ -66,14 +66,14 @@ npm start
   <!-- * `/groups/:groupId/users/:userId` -->
 
 ### Groups
-GET ALL GROUPSS A USER DOESNT HAVE
-  <!-- * `users/:userId/runs?running=false?member=false` -->
+* GET ALL GROUPS A USER DOESNT HAVE
+  <!-- * `users/:userId/groups?member=false` -->
 * GET ALL OF A USER'S GROUPS
   <!-- * `/users/:userId/groups?member=true` -->
 * GET ONE
   <!-- * `/groups/:groupId` -->
 * POST
-  <!-- * `/groups` -->
+  <!-- * `users/:userId/groups` -->
 * DELETE
   <!-- * `/groups/:groupId` -->
 * PUT
