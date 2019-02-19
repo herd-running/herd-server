@@ -4,10 +4,11 @@ function getOne(runId) {
   return knex('runs')
   .where({ 'runs.id': runId })
   .then(([data]) => {
+    if (!data) return data
     if (!data['group_id']) return data
     else {
       return knex('runs')
-      .select('groups.name', 'runs.id as id', 'creator_id', 'day', 'date', 'time', 'location', 'run_type', 'terrain', 'pace', 'distance', 'runs.description')
+      .select('groups.name', 'runs.id as id', 'creator_id', 'group_id', 'day', 'date', 'time', 'location', 'run_type', 'terrain', 'pace', 'distance', 'runs.description')
       .join('groups', 'groups.id', 'runs.group_id')
       .where({ 'runs.id': runId })
       .then(([data]) => data)
@@ -46,6 +47,11 @@ function create(
       description
     })
     .returning('*')
+    .then(([data]) => {
+      return knex('users_runs')
+        .insert({ user_id: data.creator_id, run_id: data.id })
+        .returning('*')
+    })
 }
 
 function remove(runId) {

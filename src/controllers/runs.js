@@ -7,7 +7,7 @@ function getOne(req, res, next) {
 }
 
 function create(req, res, next) {
-  if (!req.body.time || !req.body.latitude || !req.body.longitude || !req.body.run_type || !req.body.terrain) {
+  if (!req.body.creator_id || !req.body.time || !req.body.location || !req.body.latitude || !req.body.longitude || !req.body.run_type || !req.body.terrain) {
     return next({ status: 400, message: 'Could not create run' })
   }
   runModel.create(
