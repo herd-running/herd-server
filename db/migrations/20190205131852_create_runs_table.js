@@ -2,12 +2,12 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('runs', (table) => {
     table.increments();
-    table.integer('group_id').references('groups.id');
-    table.integer('creator_id').references('users.id').notNullable();
+    table.integer('group_id').references('groups.id').onDelete('CASCADE');
+    table.integer('creator_id').references('users.id').notNullable().onDelete('CASCADE');
     table.string('day');
     table.date('date');
     table.string('time').notNullable();
-    table.text('location');
+    table.text('location').notNullable();
     table.float('latitude').notNullable();
     table.float('longitude').notNullable();
     table.string('run_type').notNullable();
