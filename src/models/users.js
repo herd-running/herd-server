@@ -42,7 +42,7 @@ function getUsersGroups(userId) {
   .where({'user_id': userId})
 }
 
-//the gruops the user is not a member of yet (for discovery)
+//the groups the user is not a member of yet (for discovery)
 function getNewGroups(userId) {
   return getUsersGroups(userId)
     .then(myGroups => {
@@ -77,8 +77,9 @@ function getUserRuns(userId) {
       }
       return data
     })
-}
-
+  }
+  // leftJoin('runs_comments', 'runs_comments.run_id', 'runs.id')
+  
 //the runs the user is not participating in yet (for discovery)
 function getNewRuns(userId) {
   return getUserRuns(userId)
@@ -87,9 +88,8 @@ function getNewRuns(userId) {
         .select('runs.*')
         .join('users_runs', 'runs.id', 'users_runs.run_id')
         .join('users', 'users.id', 'users_runs.user_id')
-        .whereNotIn('runs.id', myRuns.map(e => e.run_id))
+        .whereNotIn('runs.id', myRuns.map(run => run.run_id))
         .distinct('runs.id')
-
     })
 }
 

@@ -25,7 +25,8 @@ const authenticated = (req, res, next) => {
   })
 }
 
-const status = (req, res, next) => res.status(200).send({ id: req.claim.id })
+const status = (req, res, next) => {
+  res.status(200).send({ id: req.claim.id })}
 
 const isSelf = (req, res, next) => {
   if (parseInt(req.params.userId) !== req.claim.id)
