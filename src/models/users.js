@@ -38,8 +38,8 @@ function create(first_name, last_name, email, username, password, picture_url) {
 
 function getUsersGroups(userId) {
   return knex('groups')
-  .join('users_groups', 'groups.id', 'users_groups.group_id')
-  .where({'user_id': userId})
+    .join('users_groups', 'groups.id', 'users_groups.group_id')
+    .where({ 'user_id': userId })
 }
 
 //the groups the user is not a member of yet (for discovery)
@@ -60,26 +60,39 @@ function createGroup(user_id, name, description) {
     .returning('*')
     .then(([data]) => {
       return knex('users_groups')
-      .insert({ group_id: data.id, user_id, is_leader: true })
-      .returning('*')
+        .insert({ group_id: data.id, user_id, is_leader: true })
+        .returning('*')
     })
 }
 
+function getRunRating(runId) {
+  return knex('runs')
+    .join('runs_comments', 'runs.id', 'runs_comments.run_id')
+    .where({ 'runs.id': runId })
+    .avg('rating')
+    .first()
+}
 
 function getUserRuns(userId) {
   return knex('runs')
+    .select('runs.*', 'users_runs.*')
     .join('users_runs', 'runs.id', 'users_runs.run_id')
     .join('users', 'users.id', 'users_runs.user_id')
     .where({ 'users.id': userId })
-    .then(data => {
-      for (user of data) {
-        delete user.hashed_password
-      }
-      return data
+    .then(runs => {
+      const promises = runs.map(run => {
+        return getRunRating(run.run_id)
+          .then(result => {
+            const rating = Math.floor(parseInt(result.avg))
+            run.rating = rating
+            return run
+          })
+      })
+
+      return Promise.all(promises)
     })
-  }
-  // leftJoin('runs_comments', 'runs_comments.run_id', 'runs.id')
-  
+}
+
 //the runs the user is not participating in yet (for discovery)
 function getNewRuns(userId) {
   return getUserRuns(userId)
@@ -90,9 +103,19 @@ function getNewRuns(userId) {
         .join('users', 'users.id', 'users_runs.user_id')
         .whereNotIn('runs.id', myRuns.map(run => run.run_id))
         .distinct('runs.id')
+        .then(runs => {
+          const promises = runs.map(run => {
+            return getRunRating(run.id)
+              .then(result => {
+                const rating = Math.floor(parseInt(result.avg))
+                run.rating = rating
+                return run
+              })
+          })
+          return Promise.all(promises)
+        })
     })
 }
-
 
 module.exports = {
   getOne,
@@ -100,7 +123,8 @@ module.exports = {
   create,
   getUsersGroups,
   getNewGroups,
-  createGroup, 
+  createGroup,
+  getRunRating,
   getUserRuns,
   getNewRuns
 }

@@ -1,17 +1,36 @@
 const knex = require('../../db/index')
+const userModel = require('./users')
 
 function getOne(runId) {
   return knex('runs')
   .where({ 'runs.id': runId })
-  .then(([data]) => {
-    if (!data) return data
-    if (!data['group_id']) return data
+  .first()
+  .then(run => {
+    if (!run) return run
+    if (!run['group_id']) {
+      return userModel.getRunRating(run.id)
+      .then(result => {        
+        const rating = Math.floor(parseInt(result.avg))
+        run.rating = rating
+        return run
+      })
+    }
     else {
       return knex('runs')
-      .select('groups.name', 'runs.id as id', 'creator_id', 'group_id', 'day', 'date', 'time', 'location', 'run_type', 'terrain', 'pace', 'distance', 'runs.description')
+      .select('groups.name', 'runs.id as id', 'creator_id', 'group_id', 'day', 'date', 'time', 'location', 'latitude', 'longitude', 'run_type', 'terrain', 'pace', 'distance', 'runs.description')
       .join('groups', 'groups.id', 'runs.group_id')
       .where({ 'runs.id': runId })
-      .then(([data]) => data)
+      .first()
+      .then(run => {
+        return userModel.getRunRating(run.id)
+          .then(result => {
+            console.log(result);
+            
+            const rating = Math.floor(parseInt(result.avg))
+            run.rating = rating
+            return run
+          })
+      })
     }
   })
 }
