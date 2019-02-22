@@ -73,18 +73,31 @@ function getRunRating(runId) {
     .first()
 }
 
+function getRunCreator(runId) {
+  return knex('users')
+    .select('first_name', 'last_name')
+    .join('runs', 'creator_id', 'users.id')
+    .where({ 'runs.id': runId })
+    .first()
+}
+
 function getUserRuns(userId) {
   return knex('runs')
     .select('runs.*', 'users_runs.*')
     .join('users_runs', 'runs.id', 'users_runs.run_id')
     .join('users', 'users.id', 'users_runs.user_id')
     .where({ 'users.id': userId })
+
     .then(runs => {
       const promises = runs.map(run => {
         return getRunRating(run.run_id)
           .then(result => {
             const rating = Math.floor(parseInt(result.avg))
             run.rating = rating
+            return getRunCreator(run.run_id)
+          })
+          .then(result => {
+            run.creator = `${result.first_name} ${result.last_name}`
             return run
           })
       })
@@ -109,6 +122,10 @@ function getNewRuns(userId) {
               .then(result => {
                 const rating = Math.floor(parseInt(result.avg))
                 run.rating = rating
+                return getRunCreator(run.id)
+              })
+              .then(result => {
+                run.creator = `${result.first_name} ${result.last_name}`
                 return run
               })
           })
@@ -125,6 +142,7 @@ module.exports = {
   getNewGroups,
   createGroup,
   getRunRating,
+  getRunCreator,
   getUserRuns,
   getNewRuns
 }

@@ -153,7 +153,7 @@ exports.seed = function(knex, Promise) {
           id: 10,
           group_id: 3,
           creator_id: 2,
-          description: 'Join an energetic groups of folks for a great evening run',
+          description: 'Marathon training? Join an energetic groups of folks for a great evening run',
           day: null,
           date: '2019-03-12',
           time: '6:00pm',
