@@ -49,7 +49,7 @@ exports.seed = function(knex, Promise) {
           user_id: 6,
           run_id: 3,
           title: 'Fun run, time doesn\'t work',
-          rating: 1,
+          rating: 5,
           comment: 'This was a great run, but the time just doesnt work for me to make it.'
         },
         {
@@ -81,7 +81,7 @@ exports.seed = function(knex, Promise) {
           user_id: 3,
           run_id: 5,
           title: 'Fun run, time doesn\'t work',
-          rating: 1,
+          rating: 3,
           comment: 'This was a great run, but the time just doesnt work for me to make it.'
         },
         {
@@ -97,7 +97,7 @@ exports.seed = function(knex, Promise) {
           user_id: 5,
           run_id: 6,
           title: 'Fun run, time doesn\'t work',
-          rating: 3,
+          rating: 5,
           comment: 'This was a great run, but the time just doesnt work for me to make it.'
         },
         {
@@ -113,7 +113,7 @@ exports.seed = function(knex, Promise) {
           user_id: 7,
           run_id: 7,
           title: 'Fun run, time doesn\'t work',
-          rating: 2,
+          rating: 4,
           comment: 'This was a great run, but the time just doesnt work for me to make it.'
         },
         {
@@ -145,7 +145,7 @@ exports.seed = function(knex, Promise) {
           user_id: 4,
           run_id: 9,
           title: 'Fun run, time doesn\'t work',
-          rating: 1,
+          rating: 4,
           comment: 'This was a great run, but the time just doesnt work for me to make it.'
         },
         {
@@ -161,7 +161,7 @@ exports.seed = function(knex, Promise) {
           user_id: 6,
           run_id: 10,
           title: 'Fun run, time doesn\'t work',
-          rating: 1,
+          rating: 4,
           comment: 'This was a great run, but the time just doesnt work for me to make it.'
         },
         {
