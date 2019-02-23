@@ -35,3 +35,20 @@ module.exports = {
     }
   }
 };
+
+// production: {
+//   client: 'pg',
+//   connection: {
+//     user: process.env.SQL_USER,
+//     password: process.env.SQL_PASSWORD,
+//     database: process.env.SQL_DATABASE,
+//     host: `/cloudsql/${process.env.INSTANCE_CONNECTION_NAME}`
+//   },
+//   migrations: {
+//     directory: path.join(__dirname, 'db', 'migrations')
+//   },
+//   seeds: {
+//     directory: path.join(__dirname, 'db', 'seeds')
+//   }
+// }
+// }
