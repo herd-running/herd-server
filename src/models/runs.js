@@ -111,11 +111,40 @@ function removeUserFromRun(run_id, user_id) {
     .returning('*')
 }
 
+function getAllComments(run_id) {
+  return knex('runs_comments')
+    .select('runs_comments.*', 'users.first_name', 'users.last_name')
+    .join('users', 'users.id', 'runs_comments.user_id')
+    .where({ run_id })
+}
+
+function postComment(run_id, user_id, title, comment, rating) {
+  return knex('runs_comments')
+    .insert({
+      run_id,
+      user_id,
+      title,
+      comment,
+      rating
+    })
+    .returning('*')
+}
+
+function removeComment(run_id, comment_id) {
+  return knex('runs_comments')
+    .del()
+    .where({run_id, 'id': comment_id})
+    .returning('*')
+}
+
 module.exports = {
   getOne,
   create,
   remove,
   getRunUsers,
   addUserToRun,
-  removeUserFromRun
+  removeUserFromRun,
+  getAllComments,
+  postComment,
+  removeComment
 }
