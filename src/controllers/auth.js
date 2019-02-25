@@ -30,8 +30,14 @@ const status = (req, res, next) => {
 
 const isSelf = (req, res, next) => {
   if (parseInt(req.params.userId) !== req.claim.id)
-    return next({ status: 401, message: 'Unauthorized is Self' })
+    return next({ status: 401, message: 'Unauthorized' })
   next()
 }
 
-module.exports = { login, status, authenticated, status, isSelf }
+module.exports = { 
+  login, 
+  status, 
+  authenticated, 
+  status, 
+  isSelf 
+}
