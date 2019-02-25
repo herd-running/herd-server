@@ -2,7 +2,7 @@ const userModel = require('../models/users')
 
 function getOne(req, res, next){
   userModel.getOne(req.params.userId)
-  .then( ([ data ]) => res.send(data))
+  .then(data => res.send(data))
   .catch(next)
 }
 

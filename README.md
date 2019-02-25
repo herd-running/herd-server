@@ -4,16 +4,14 @@ Have you ever wanted to join a running group, but you weren't sure who else woul
 ![View Run](/ViewRunScreenshot.png)
 
 ## Tech/framework used
-
 * Frontend : React Native / Redux / JavaScript / HTML / CSS
 * Backend : Node.js / Express / PostgreSQL / Knex.js
 
 ## To Install
-
 ```
 npm install
 ```
-### Create SQL DataBase
+### Create psql Database
 ```
 createdb herd_dev
 ```
@@ -34,7 +32,6 @@ npm start
 ![Data structure](/Database.png)
 
 ## Routes
-
 ### Authorization
 * GET
   * `/login`
@@ -42,8 +39,6 @@ npm start
   * `/login`
 
 ### Users
-* GET ONE
-  * `/users/:userId` 
 * POST
   * `/users`
 * GET ALL USERS ON A RUN

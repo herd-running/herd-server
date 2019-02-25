@@ -11,7 +11,7 @@ const login = (username, password) => {
     })
     .then(status => {
       if (!status) throw { status: 401, message: 'Unauthorized' }
-      delete user.password
+      delete user.hashed_password
       return user
     })
 }

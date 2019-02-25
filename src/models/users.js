@@ -5,6 +5,10 @@ function getOne(userId) {
   return (
     knex('users')
       .where({ 'id': userId })
+      .then(([data]) => {
+        delete data.hashed_password
+        return data
+      })
   )
 }
 
