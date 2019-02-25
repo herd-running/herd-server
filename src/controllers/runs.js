@@ -78,9 +78,6 @@ function removeComment(req, res, next) {
     .catch(next)
 }
 
-
-
-
 module.exports = {
   getOne,
   create,
