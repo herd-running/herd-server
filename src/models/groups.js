@@ -1,4 +1,5 @@
 const knex = require('../../db/index')
+const userModel = require('./users')
 
 function getOne(groupId) {
   return knex('groups')
@@ -37,16 +38,16 @@ function getGroupUsers(groupId, leader) {
   }
 }
 
-function addUserToGroup (group_id, user_id) {
+function addUserToGroup(group_id, user_id) {
   return knex('users_groups')
     .insert({ group_id, user_id, is_leader: false })
     .returning('*')
 }
 
-function removeUserFromGroup (group_id, user_id) {
+function removeUserFromGroup(group_id, user_id) {
   return knex('users_groups')
     .del()
-    .where({group_id, user_id})
+    .where({ group_id, user_id })
     .returning('*')
 }
 
@@ -55,30 +56,41 @@ function getGroupRuns(groupId) {
     .select('groups.*', 'runs.id as id', 'day', 'date', 'time', 'location', 'run_type')
     .join('groups', 'groups.id', 'runs.group_id')
     .where({ 'group_id': groupId })
+    .then(runs => {
+      const promises = runs.map(run => {
+        return userModel.getRunRating(run.id)
+          .then(result => {
+            const rating = Math.floor(parseInt(result.avg))
+            run.rating = rating
+            return run
+          })
+      })
+      return Promise.all(promises)
+    })
 }
 
 function getAllComments(group_id) {
   return knex('groups_comments')
-  .select('groups_comments.*', 'users.first_name', 'users.last_name')
-  .join('users', 'users.id', 'groups_comments.user_id')
-  .where({ group_id })
+    .select('groups_comments.*', 'users.first_name', 'users.last_name')
+    .join('users', 'users.id', 'groups_comments.user_id')
+    .where({ group_id })
 }
 
 function postComment(group_id, user_id, title, comment) {
   return knex('groups_comments')
-  .insert({
-    group_id,
-    user_id,
-    title,
-    comment
-  })
-  .returning('*')
+    .insert({
+      group_id,
+      user_id,
+      title,
+      comment
+    })
+    .returning('*')
 }
 
 function removeComment(group_id, comment_id) {
   return knex('groups_comments')
     .del()
-    .where({group_id, 'id': comment_id})
+    .where({ group_id, 'id': comment_id })
     .returning('*')
 }
 
