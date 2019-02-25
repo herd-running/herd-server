@@ -85,10 +85,10 @@ npm start
 * GET ALL RUNS A USER DOESNT HAVE
   * `users/:userId/runs?running=false`
 * GET ALL OF A USER'S RUNS
-  * `/users/:userId/runs?running=true` -->
- * GET ALL OF A GROUP'S RUNS
-  * `/groups/:groupId/runs` -->
- * GET ONE
+  * `/users/:userId/runs?running=true`
+* GET ALL OF A GROUP'S RUNS
+  * `/groups/:groupId/runs`
+* GET ONE
   * `runs/:runId`
 * POST
   * `/runs`
