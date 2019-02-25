@@ -57,16 +57,29 @@ function getGroupRuns(groupId) {
     .where({ 'group_id': groupId })
 }
 
-function getAllComments(req, res, next) {
-
+function getAllComments(group_id) {
+  return knex('groups_comments')
+  .select('groups_comments.*', 'users.first_name', 'users.last_name')
+  .join('users', 'users.id', 'groups_comments.user_id')
+  .where({ group_id })
 }
 
-function postComment(req, res, next) {
-
+function postComment(group_id, user_id, title, comment) {
+  return knex('groups_comments')
+  .insert({
+    group_id,
+    user_id,
+    title,
+    comment
+  })
+  .returning('*')
 }
 
-function removeComment(req, res, next) {
-
+function removeComment(group_id, comment_id) {
+  return knex('groups_comments')
+    .del()
+    .where({group_id, 'id': comment_id})
+    .returning('*')
 }
 
 

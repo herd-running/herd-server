@@ -36,6 +36,8 @@ module.exports = {
   }
 };
 
+//For Google Cloud deployment
+
 // production: {
 //   client: 'pg',
 //   connection: {

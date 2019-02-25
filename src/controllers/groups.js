@@ -35,15 +35,28 @@ function getGroupRuns(req, res, next) {
 }
 
 function getAllComments(req, res, next) {
-
+  groupModel.getAllComments(req.params.groupId)
+    .then(data => res.send(data))
+    .catch(next)
 }
 
 function postComment(req, res, next) {
-
+  if (!req.body.user_id || !req.body.title || !req.body.comment) {
+    return next({ status: 400, message: 'Could not post comment' })
+  }
+  groupModel.postComment(
+    req.params.groupId,
+    req.body.user_id,
+    req.body.title,
+    req.body.comment)
+    .then(data => res.status(201).send(data))
+    .catch(next)
 }
 
 function removeComment(req, res, next) {
-
+  groupModel.removeComment(req.params.groupId, req.params.commentId)
+    .then(data => res.send(data))
+    .catch(next)
 }
 
 
