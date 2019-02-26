@@ -11,7 +11,8 @@ exports.seed = function(knex, Promise) {
         {id: 4, first_name: 'Katrina', last_name: 'Agustin', username: 'kagustin', email: 'test@katrina.com', hashed_password: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US', picture_url: 'https://media.licdn.com/dms/image/C5603AQHMveAU-vLiVw/profile-displayphoto-shrink_800_800/0?e=1554940800&v=beta&t=AaKrdHY4qtioJMBZI5XM6U16HiYhc9auJB39EgY_DBc'},
         {id: 5, first_name: 'Sarah', last_name: 'Lee', username: 'slee', email: 'test@sarah.com', hashed_password: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US', picture_url: 'https://media.licdn.com/dms/image/C5603AQHdvgJm1omWZw/profile-displayphoto-shrink_800_800/0?e=1554940800&v=beta&t=UreRN6TBUtTa02SRLvbMVf3oP5KagV-MCWIFmTvgHxA'},
         {id: 6, first_name: 'Lindsey', last_name: 'Hommer', username: 'lhommer', email: 'test@lindsey.com', hashed_password: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US'},
-        {id: 7, first_name: 'Jill', last_name: 'Kranz', username: 'jkranz', email: 'test@jill.com', hashed_password: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US', picture_url: 'https://media.licdn.com/dms/image/C4E03AQE0AiKyLzUhUQ/profile-displayphoto-shrink_200_200/0?e=1551916800&v=beta&t=uc6s19PPuSiTS21-t93yRDmH_fLTl_31JsANAncemHY'}
+        {id: 7, first_name: 'Jill', last_name: 'Kranz', username: 'jkranz', email: 'test@jill.com', hashed_password: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US', picture_url: 'https://media.licdn.com/dms/image/C4E03AQE0AiKyLzUhUQ/profile-displayphoto-shrink_200_200/0?e=1551916800&v=beta&t=uc6s19PPuSiTS21-t93yRDmH_fLTl_31JsANAncemHY'},
+        {id: 8, first_name: 'Celia', last_name: 'Marshall', username: 'test', email: 'test@celia.com', hashed_password: '$2b$10$3OaRYsjX4tvuBBP9MzVbxeeS7w1CCRXFLxVnURS/KyLxZNJhew/US', picture_url: 'https://avatars3.githubusercontent.com/u/39441243?s=460&v=4' }
       ])
     })
     .then(() => {
