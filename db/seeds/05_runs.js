@@ -212,6 +212,22 @@ exports.seed = function(knex, Promise) {
           pace: '9 - 10 minutes/mile',
           terrain: 'Trail',
           distance: 'As much as you want!'
+        },
+        {
+          id: 14,
+          group_id: 1,
+          creator_id: 1,
+          description: 'I am training for a marathon and would love some company for all or part of my long runs!',
+          day: 'Friday',
+          date: null,
+          time: '5:00pm',
+          location: 'Lake Union Loop',
+          latitude: 47.625912,
+          longitude: -122.338470,
+          run_type: 'Long Run',
+          pace: '7 - 8 minutes/mile',
+          terrain: 'Trail',
+          distance: '15 miles'
         }
       ])
     })
