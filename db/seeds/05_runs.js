@@ -226,7 +226,7 @@ exports.seed = function(knex, Promise) {
           longitude: -122.338470,
           run_type: 'Long Run',
           pace: '7 - 8 minutes/mile',
-          terrain: 'Trail',
+          terrain: 'Pavement',
           distance: '15 miles'
         }
       ])
