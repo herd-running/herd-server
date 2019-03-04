@@ -5,7 +5,7 @@ exports.up = function(knex, Promise) {
     table.integer('group_id').references('groups.id').onDelete('CASCADE');
     table.integer('creator_id').references('users.id').notNullable().onDelete('CASCADE');
     table.string('day');
-    table.string('date');
+    table.date('date');
     table.string('time').notNullable();
     table.text('location').notNullable();
     table.float('latitude').notNullable();
